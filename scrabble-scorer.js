@@ -58,8 +58,8 @@ const scoringAlgorithms = [
       return word.length;
     }*/
     scorerFunction: Function
-  }), 
-  Object({ 
+  })), 
+  (Object({ 
     name: 'Bonus Vowels', 
     description: 'Vowels are 3 pts, consonants are 1 pt.', /*scorerFunction: function vowelBonusScore(word) {
       const vowelArray = ['a', 'e', 'i', 'o', 'u'];
@@ -74,8 +74,8 @@ const scoringAlgorithms = [
       return score;
     }*/
     scorerFunction: Function
-  }), 
-  Object({ 
+  })), 
+  (Object({ 
     name: 'Scrabble', 
     description: 'The traditional scoring algorithm.', /*scorerFunction: function scrabbleScore(word) {
       word = word.toLowerCase();
