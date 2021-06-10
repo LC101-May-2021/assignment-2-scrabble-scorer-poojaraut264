@@ -24,9 +24,31 @@ Enter a word to score: `);
 lowerWord = enteredWord.toLowerCase();
 }
 
-function simpleScore(word){}
-function vowelBonusScore(word){}
-function scrabbleScore(word){}
+function simpleScore(word) {
+  return word.length;
+}
+
+function vowelBonusScore(word) {
+  const vowelArray = ['a', 'e', 'i', 'o', 'u'];
+  let score = 0;
+  for(i=0;i<word.length;i++) {
+    if (vowelArray.includes(word[i])) {
+      score += 3;
+    } else {
+      score += 1;    
+    }
+  }
+  return score;
+}
+
+function scrabbleScore(word) {
+  word = word.toLowerCase();
+  let score = 0;
+  for (let i = 0; i < word.length; i++) {
+    score += newPointStructure[word[i]];
+  }
+  return score;
+}
 
 const scoringAlgorithms = [ 
   Object({ 
