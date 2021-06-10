@@ -71,7 +71,7 @@ let scrabble = {
   
   scorerFunction: 
   
-  function oldScrabbleScorer(word) {
+/*  function oldScrabbleScorer(word) {
     let letterPoints = "\n";
     
     for (let i = 0; i < word.length; i++) {
@@ -85,7 +85,15 @@ let scrabble = {
       }
     }
     return letterPoints;
-  }
+}*/
+  function scrabbleScore(word) {
+    let letterPoints = "\n";
+    word = word.toLowerCase();
+    for (let i = 0; i < word.length; i++) {
+      letterPoints += `Points for '${word[i]}': ${newPointStructure[word[i]]}\n`;
+    }
+    return letterPoints;
+}
 };
 
 const scoringAlgorithms = [simple, bonus, scrabble];
@@ -105,10 +113,27 @@ function displayScore(option) {
   console.log(`Score for '${enteredWord}': ${option.scorerFunction(upperWord)}`);
 };
 
-function transform() {};
+function transform(oldPointObj) {
+  let newValue = 0;
+  let newKey = '';
+  let newPointObj = {};
 
-let newPointStructure;
+  for (item in oldPointObj) {
+    newValue = item;
 
+    for(i=0;i < oldPointObj[item].length; i++) {
+
+      newKey = oldPointObj[item][i].toLowerCase();
+      newPointObj[newKey] = newValue;
+    }
+  }
+
+  return newPointObj;
+};
+
+let newPointStructure = transform(oldPointStructure);
+//console.log(newPointStructure);
+upperWord = enteredWord.toUpperCase();
 function runProgram() {
    initialPrompt();
    let optionSelected = scorerPrompt();
