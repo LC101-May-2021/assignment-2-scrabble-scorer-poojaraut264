@@ -23,33 +23,22 @@ function initialPrompt() {
 Enter a word to score: `); 
 lowerWord = enteredWord.toLowerCase();
 }
-  
-/*  function oldScrabbleScorer(word) {
-    let letterPoints = "\n";
-    
-    for (let i = 0; i < word.length; i++) {
-  
-      for (const pointValue in oldPointStructure) {
-  
-      if (oldPointStructure[pointValue].includes(word[i])) {
-        letterPoints += `Points for '${word[i]}': ${pointValue}\n`
-      }
-  
-      }
-    }
-    return letterPoints;
-}*/
+
+function simpleScore(word){}
+function vowelBonusScore(word){}
+function scrabbleScore(word){}
 
 const scoringAlgorithms = [ 
   Object({ 
     name: 'Simple Score', 
-    description: 'Each letter is worth 1 point.', scorerFunction:function (word) {
+    description: 'Each letter is worth 1 point.', 
+    scorerFunction: function simpleScore(word) {
       return word.length;
     }
   }), 
   Object({ 
     name: 'Bonus Vowels', 
-    description: 'Vowels are 3 pts, consonants are 1 pt.', scorerFunction:function (word) {
+    description: 'Vowels are 3 pts, consonants are 1 pt.', scorerFunction: function vowelBonusScore(word) {
       const vowelArray = ['a', 'e', 'i', 'o', 'u'];
       let score = 0;
       for(i=0;i<word.length;i++) {
@@ -60,24 +49,20 @@ const scoringAlgorithms = [
         }
       }
       return score;
-    } 
+    }
   }), 
   Object({ 
     name: 'Scrabble', 
-    description: 'The traditional scoring algorithm.', scorerFunction:function (word) {
+    description: 'The traditional scoring algorithm.', scorerFunction: function scrabbleScore(word) {
       word = word.toLowerCase();
       let score = 0;
       for (let i = 0; i < word.length; i++) {
         score += newPointStructure[word[i]];
       }
       return score;
-    } 
+    }
   })
 ];
-
-let simpleScore = scoringAlgorithms[0].scorerFunction(enteredWord);
-let vowelBonusScore = scoringAlgorithms[1].scorerFunction(enteredWord);
-let scrabbleScore = scoringAlgorithms[2].scorerFunction(enteredWord);
 
 function scorerPrompt() {
 let scorerPromptSelected = input.question(`Which scoring algorithm would you like to use?
