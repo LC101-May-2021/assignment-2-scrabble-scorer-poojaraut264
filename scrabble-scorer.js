@@ -23,10 +23,6 @@ function initialPrompt() {
 Enter a word to score: `); 
 lowerWord = enteredWord.toLowerCase();
 }
-
-let simpleScore = 0;
-let vowelBonusScore = 0;
-let scrabbleScore = 0;
   
 /*  function oldScrabbleScorer(word) {
     let letterPoints = "\n";
@@ -48,35 +44,40 @@ const scoringAlgorithms = [
   Object({ 
     name: 'Simple Score', 
     description: 'Each letter is worth 1 point.', scorerFunction:function (word) {
-      simpleScore = word.length;
-      return simpleScore;
+      return word.length;
     }
   }), 
   Object({ 
     name: 'Bonus Vowels', 
     description: 'Vowels are 3 pts, consonants are 1 pt.', scorerFunction:function (word) {
       const vowelArray = ['a', 'e', 'i', 'o', 'u'];
+      let score = 0;
       for(i=0;i<word.length;i++) {
         if (vowelArray.includes(word[i])) {
-          vowelBonusScore += 3;
+          score += 3;
         } else {
-          vowelBonusScore += 1;    
+          score += 1;    
         }
       }
-      return vowelBonusScore;
+      return score;
     } 
   }), 
   Object({ 
     name: 'Scrabble', 
     description: 'The traditional scoring algorithm.', scorerFunction:function (word) {
       word = word.toLowerCase();
+      let score = 0;
       for (let i = 0; i < word.length; i++) {
-        scrabbleScore += Number(newPointStructure[word[i]]);
+        score += newPointStructure[word[i]];
       }
-      return scrabbleScore;
+      return score;
     } 
   })
 ];
+
+let simpleScore = scoringAlgorithms[0].scorerFunction(enteredWord);
+let vowelBonusScore = scoringAlgorithms[1].scorerFunction(enteredWord);
+let scrabbleScore = scoringAlgorithms[2].scorerFunction(enteredWord);
 
 function scorerPrompt() {
 let scorerPromptSelected = input.question(`Which scoring algorithm would you like to use?
@@ -104,7 +105,7 @@ function transform(oldPointObj) {
     for(i=0;i < oldPointObj[item].length; i++) {
 
       newKey = oldPointObj[item][i].toLowerCase();
-      newPointObj[newKey] = newValue;
+      newPointObj[newKey] = Number(newValue);
     }
   }
 
