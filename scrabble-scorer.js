@@ -186,7 +186,6 @@ function transform(oldPointObj) {
 let newPointStructure = transform(oldPointStructure);
 
 newPointStructure[' '] = 0;
-console.log(newPointStructure);
 
 function runProgram() {
    initialPrompt();
