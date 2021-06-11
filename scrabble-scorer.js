@@ -178,8 +178,10 @@ function transform(oldPointObj) {
       newPointObj[newKey] = Number(newValue);
     }
   }
+  
+  //newKey = " ";
+  //newPointObj[newKey] = 0;
 
-  newPointObj[' '] = 0;
   return newPointObj;
 };
 
