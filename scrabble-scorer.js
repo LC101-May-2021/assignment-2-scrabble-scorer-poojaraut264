@@ -179,14 +179,14 @@ function transform(oldPointObj) {
     }
   }
   
-  //newKey = " ";
-  //newPointObj[newKey] = 0;
-
   return newPointObj;
 };
 
 /* C.2. Locate the newPointStructure object in the starter code and set it equal to transform(oldPointStructure). */
 let newPointStructure = transform(oldPointStructure);
+
+newPointStructure[' '] = 0;
+console.log(newPointStructure);
 
 function runProgram() {
    initialPrompt();
