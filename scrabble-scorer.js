@@ -46,14 +46,20 @@ function initialPrompt() {
     enteredWord = input.question("Enter a word to score: "); 
     lowerWord = enteredWord.toLowerCase();
 
-    for (i=0; i<lowerWord.length && !errorFound; i++) {
-      let ascii = Number(lowerWord.charCodeAt(i));
-      
-      // Error if not a space or non (a-z) character
-      if ((ascii === 32) || (ascii >= 97 && ascii <= 122)) {
-        errorFound = false;
-      } else {
-        errorFound = true;
+    if (lowerWord === '') {
+      errorFound = true;
+    } else {
+
+      for (i=0; i<lowerWord.length && !errorFound; i++) {
+        let ascii = Number(lowerWord.charCodeAt(i));
+        
+        // Error if not a space or non (a-z) character
+        if ((ascii === 32) || (ascii >= 97 && ascii <= 122)) {
+          errorFound = false;
+        } else {
+          errorFound = true;
+        }
+
       }
 
     }
@@ -153,7 +159,7 @@ return scoringAlgorithms[scorerPromptSelected];
 }
 
 function displayScore(option) {
-  console.log(`Score for '${enteredWord}': ${option.scoringFunction(lowerWord)}`);
+  console.log(`\nScore for '${enteredWord}': ${option.scoringFunction(lowerWord)}`);
 };
 
 /* C.1. Write the rest of the transform() function. It will need to take an object as a parameter - specifically the oldPointStructure object. Calling transform(oldPointStructure) will return an object with lowercase letters as keys. The value for each key will be the points assigned to that letter. */
