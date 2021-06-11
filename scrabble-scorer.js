@@ -24,43 +24,49 @@ Enter a word to score: `);
 lowerWord = enteredWord.toLowerCase();
 }
 
-let simpleScore = { 
-  name: 'Simple Score', 
-  description: 'Each letter is worth 1 point.', 
-  scorerFunction: function (word) {
-    return word.length;
-  }
-}
+let simpleScore = function (word) {
+  return word.length;
+};
 
-let vowelBonusScore = { 
-  name: 'Bonus Vowels', 
-  description: 'Vowels are 3 pts, consonants are 1 pt.', scorerFunction: function (word) {
-    const vowelArray = ['a', 'e', 'i', 'o', 'u'];
-    let score = 0;
-    for(i=0;i<word.length;i++) {
-      if (vowelArray.includes(word[i])) {
-        score += 3;
-      } else {
-        score += 1;    
-      }
+let vowelBonusScore = function (word) {
+  const vowelArray = ['a', 'e', 'i', 'o', 'u'];
+  let score = 0;
+  for(i=0;i<word.length;i++) {
+    if (vowelArray.includes(word[i])) {
+      score += 3;
+    } else {
+      score += 1;    
     }
-    return score;
   }
-} 
+  return score;
+};
 
-let scrabbleScore = { 
-  name: 'Scrabble', 
-  description: 'The traditional scoring algorithm.', scorerFunction: function (word) {
-    word = word.toLowerCase();
-    let score = 0;
-    for (let i = 0; i < word.length; i++) {
-      score += newPointStructure[word[i]];
-    }
-    return score;
-  } 
-}
+let scrabbleScore = function (word) {
+  word = word.toLowerCase();
+  let score = 0;
+  for (let i = 0; i < word.length; i++) {
+    score += newPointStructure[word[i]];
+  }
+  return score;
+};
 
-const scoringAlgorithms = [simpleScore, vowelBonusScore, scrabbleScore];
+const scoringAlgorithms = [ 
+  Object({ 
+    name: 'Simple Score', 
+    description: 'Each letter is worth 1 point.', 
+    scorerFunction: simpleScore  
+  }), 
+  Object({ 
+    name: 'Bonus Vowels', 
+    description: 'Vowels are 3 pts, consonants are 1 pt.', 
+    scorerFunction: vowelBonusScore
+  }), 
+  Object({ 
+    name: 'Scrabble', 
+    description: 'The traditional scoring algorithm.', 
+    scorerFunction: scrabbleScore
+  })
+];
 
 function scorerPrompt() {
 let scorerPromptSelected = input.question(`Which scoring algorithm would you like to use?
@@ -118,4 +124,3 @@ module.exports = {
 	runProgram: runProgram,
 	scorerPrompt: scorerPrompt
 };
-
