@@ -120,19 +120,19 @@ let scrabbleScore = function (word) {
 
 B.2.2. Examine the table for the information to store in name and description. The scorerFunction for each object should be the name of one of the three scoring algorithms already defined. */
 
-simpleScoreObj = { 
+let simpleScoreObj = { 
   name: 'Simple Score', 
   description: 'Each letter is worth 1 point.', 
   scoringFunction: simpleScore  
 } 
 
-vowelBonusObj = { 
+let vowelBonusObj = { 
   name: 'Bonus Vowels', 
   description: 'Vowels are 3 pts, consonants are 1 pt.', 
   scoringFunction: vowelBonusScore
 }
 
-scrabbleScoreObj = { 
+let scrabbleScoreObj = { 
   name: 'Scrabble', 
   description: 'The traditional scoring algorithm.', 
   scoringFunction: scrabbleScore
